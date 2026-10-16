@@ -7,11 +7,11 @@ pipeline {
     environment  {
         SCANNER_HOME= tool 'sonar-scanner'                // replace your sonarqube scanner name
         SONARQUBE_SERVER  = 'sonar-server'                // replace your Jenkins global SonarQube server name (Manage Jenkins > Configure System)
-        AWS_ACCOUNT_ID = '884394270268'                   // replace AWS account ID
+        AWS_ACCOUNT_ID = '445617515877'                   // replace AWS account ID
         AWS_ECR_REPO_NAME = 'swiggy'                      //replace ECR repository name
         SONAR_TOKEN_CRED  = 'sonarqube-token'            // Jenkins secret text credential id
-        AWS_DEFAULT_REGION = 'us-east-1'                 // replace AWS region
-        REPOSITORY_URI = "884394270268.dkr.ecr.us-east-1.amazonaws.com"        // replace your repository URL
+        AWS_DEFAULT_REGION = 'ap-south-1'                 // replace AWS region
+        REPOSITORY_URI = "445617515877.dkr.ecr.ap-south-1.amazonaws.com/swiggy"     // replace your repository URL
 
     }
     stages {
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'master', url: 'https://github.com/arumullayaswanth/Swiggy-GitOps-project.git'
+                git branch: 'main', url: 'https://github.com/princevaishnav00/Swigyy-GitOps-EKS.git'
             }
         }
         stage("List Files") {
@@ -115,14 +115,14 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/arumullayaswanth/Swiggy-GitOps-project.git'
+                git branch: 'main', url: 'https://github.com/princevaishnav00/Swigyy-GitOps-EKS.git'
             }
         }
         stage('Update Deployment file') {
             environment {
-                GIT_REPO_NAME = "Swiggy-GitOps-project"      // replace your github rep name
-                GIT_EMAIL = "yaswanth.arumulla@gmail.com"    //replacr your email id
-                GIT_USER_NAME = "arumullayaswanth"           // replace your user name
+                GIT_REPO_NAME = "Swigyy-GitOps-EKS"      // replace your github rep name
+                GIT_EMAIL = "princevaishnav936@gmail.com"    //replacr your email id
+                GIT_USER_NAME = "princevaishnav00"           // replace your user name
                 YAML_FILE = "deployment.yml"
             }
             steps {
@@ -138,7 +138,7 @@ pipeline {
                             sed -i "s#image:.*#image: ${REPOSITORY_URI}/${AWS_ECR_REPO_NAME}:$BUILD_NUMBER#g" ${YAML_FILE}
                             git add .
                             git commit -m "Update ${AWS_ECR_REPO_NAME} Image to version \${BUILD_NUMBER}"
-                            git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                            git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
         
                         '''
                     }
@@ -155,8 +155,8 @@ pipeline {
             sh 'if [ ! -f dependency-check-report.xml ]; then echo "No dependency check report found" > dependency-check-report.xml; fi'
         }
         emailext(
-            from: 'yaswanth.arumulla@gmail.com',
-            replyTo: 'yaswanth.arumulla@gmail.com',
+            from: 'princevaishnav936@gmail.com',
+            replyTo: 'princevaishnav936@gmail.com',
             attachLog: true,
             subject: "Build ${currentBuild.result}",
             body: """
@@ -174,7 +174,7 @@ pipeline {
                 </body>
                 </html>
             """,
-            to: 'yaswanth.arumulla@gmail.com',
+            to: 'princevaishnav936@gmail.com',
             mimeType: 'text/html',
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt,**/dependency-check-report.xml'
         )

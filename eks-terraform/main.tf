@@ -1,11 +1,11 @@
 
 provider "aws" {
-  region = "us-east-1" # Specify your desired region
+  region = "ap-south-1" # Specify your desired region
 }
 
 #Creating IAM role for EKS
 resource "aws_iam_role" "master" {
-  name = "yaswanth-eks-master1"
+  name = "prince-eks-master1"
 
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -37,7 +37,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
 }
 
 resource "aws_iam_role" "worker" {
-  name = "yaswanth-eks-worker1"
+  name = "prince-eks-worker1"
 
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -54,7 +54,7 @@ resource "aws_iam_role" "worker" {
 }
 
 resource "aws_iam_policy" "autoscaler" {
-  name = "veera-eks-autoscaler-policy1"
+  name = "prince-eks-autoscaler-policy1"
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -143,7 +143,7 @@ data "aws_security_group" "selected" {
 
 #Creating EKS Cluster
 resource "aws_eks_cluster" "eks" {
-  name     = "project-eks"
+  name     = "swiggy-eks"
   role_arn = aws_iam_role.master.arn
 
   vpc_config {
@@ -151,7 +151,7 @@ resource "aws_eks_cluster" "eks" {
   }
 
   tags = {
-    "Name" = "MyEKS"
+    "Name" = "swiggy-eks"
   }
 
   depends_on = [
@@ -167,7 +167,7 @@ resource "aws_eks_node_group" "node-grp" {
   subnet_ids      = [data.aws_subnet.subnet-1.id, data.aws_subnet.subnet-2.id]
   capacity_type   = "ON_DEMAND"
   disk_size       = 20
-  instance_types  = ["t2.large"]
+  instance_types  = ["t3.small"]
 
 
 
@@ -177,7 +177,7 @@ resource "aws_eks_node_group" "node-grp" {
   }
 
   tags = {
-    Name = "project-eks-node-group"
+    Name = "swiggy-eks-node-group"
   }
 
   scaling_config {

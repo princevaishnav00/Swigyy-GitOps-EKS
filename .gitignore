@@ -1,0 +1,177 @@
+# ==========================================
+# GitIgnore for Swiggy EKS GitOps Project
+# ==========================================
+
+# ------------------------------------------
+# 1. Terraform (Critical Security & Bloat)
+# ------------------------------------------
+# Local .terraform directories containing provider plugins (~1.7+ GB)
+**/.terraform/
+.terraform/
+
+# Terraform state files (may contain passwords, private keys, and sensitive infrastructure metadata)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfstate.backup
+**/*.lock.hcl
+
+# Sensitive Terraform variable definition files
+*.tfvars
+*.tfvars.json
+**/*.tfvars
+**/*.tfvars.json
+
+# Terraform override configurations
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI and crash logs
+crash.log
+crash.*.log
+.terraformrc
+terraform.rc
+
+# ------------------------------------------
+# 2. Node.js / React (Swiggy Application)
+# ------------------------------------------
+# Dependency directories
+node_modules/
+**/node_modules/
+jspm_packages/
+.pnp
+.pnp.js
+
+# Production build outputs
+build/
+**/build/
+dist/
+**/dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Test coverage
+coverage/
+**/coverage/
+*.lcov
+
+# Environment variables & secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+!.env.example
+
+# Cache
+.eslintcache
+.cache/
+
+# ------------------------------------------
+# 3. Security, Credentials & Private Keys
+# ------------------------------------------
+# SSH & TLS Private Keys and Certificates
+*.pem
+*.key
+*.pkcs12
+*.pfx
+*.p12
+*.cer
+*.crt
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# AWS Credentials & Config
+.aws/
+*accessKeys.csv
+*credentials.csv
+
+# Kubernetes cluster credentials
+kubeconfig
+*.kubeconfig
+.kube/
+secrets.yaml
+secrets.yml
+secret.yaml
+secret.yml
+*.secret.yaml
+*.secret.yml
+
+# Vault token / credentials
+.vault-token
+.vault/
+
+# ------------------------------------------
+# 4. CI/CD & Scanners (Jenkins / SonarQube / Docker)
+# ------------------------------------------
+# SonarQube scanner cache and analysis output
+.scannerwork/
+**/.scannerwork/
+.sonar/
+**/.sonar/
+
+# Docker logs and overrides
+docker-compose.override.yml
+*.log
+
+# ------------------------------------------
+# 5. OS Specific Files
+# ------------------------------------------
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+
+# ------------------------------------------
+# 6. IDEs & Editors
+# ------------------------------------------
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# ------------------------------------------
+# 7. Archives & Binary Downloads
+# ------------------------------------------
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z

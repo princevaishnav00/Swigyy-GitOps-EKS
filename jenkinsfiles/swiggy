@@ -11,7 +11,7 @@ pipeline {
         AWS_ECR_REPO_NAME = 'swiggy'                      //replace ECR repository name
         SONAR_TOKEN_CRED  = 'sonarqube-token'            // Jenkins secret text credential id
         AWS_DEFAULT_REGION = 'ap-south-1'                 // replace AWS region
-        REPOSITORY_URI = "445617515877.dkr.ecr.ap-south-1.amazonaws.com/swiggy"     // replace your repository URL
+        REPOSITORY_URI = "445617515877.dkr.ecr.ap-south-1.amazonaws.com"     // replace your repository URL
 
     }
     stages {
@@ -162,7 +162,7 @@ pipeline {
             body: """
                 <html>
                 <body>
-                    <div style="background-color: #fffd7aff; padding: 10px; margin-bottom: 10px;">
+                    <div style="background-color: #7ab8ffff; padding: 10px; margin-bottom: 10px;">
                         <p style="color: white; font-weight: bold;">Project: ${env.JOB_NAME}</p>
                     </div>
                     <div style="background-color: #dce7dcff; padding: 10px; margin-bottom: 10px;">
